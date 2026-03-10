@@ -1,0 +1,57 @@
+﻿<Window x:Class="BIBLE.BookWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Добавление/редактирование книги" Height="550" Width="500"
+        WindowStartupLocation="CenterOwner" WindowStyle="ToolWindow">
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Заголовок -->
+        <TextBlock x:Name="TitleTextBlock" Text="Добавление книги" FontSize="20" FontWeight="Bold" 
+                   Margin="0,0,0,20" Grid.Row="0"/>
+
+        <!-- Поля ввода с прокруткой -->
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <StackPanel Margin="0,0,0,20">
+                <!-- Название -->
+                <Label Content="Название книги:" FontWeight="Bold"/>
+                <TextBox x:Name="TitleTextBox" Margin="0,0,0,10" Padding="5"/>
+
+                <!-- Авторы (множественный выбор) -->
+                <Label Content="Авторы:" FontWeight="Bold"/>
+                <ListBox x:Name="AuthorListBox" Margin="0,0,0,10" Height="100"
+                         SelectionMode="Multiple" DisplayMemberPath="FullName"/>
+
+                <!-- Жанры (множественный выбор) -->
+                <Label Content="Жанры:" FontWeight="Bold"/>
+                <ListBox x:Name="GenreListBox" Margin="0,0,0,10" Height="100"
+                         SelectionMode="Multiple" DisplayMemberPath="Name"/>
+
+                <!-- Год издания -->
+                <Label Content="Год издания:" FontWeight="Bold"/>
+                <TextBox x:Name="YearTextBox" Margin="0,0,0,10" Padding="5"/>
+
+                <!-- ISBN (БЕЗ ОГРАНИЧЕНИЯ ДЛИНЫ) -->
+                <Label Content="ISBN:" FontWeight="Bold"/>
+                <TextBox x:Name="ISBNTextBox" Margin="0,0,0,10" Padding="5"/>
+
+                <!-- Количество в наличии -->
+                <Label Content="Количество в наличии:" FontWeight="Bold"/>
+                <TextBox x:Name="QuantityTextBox" Margin="0,0,0,10" Padding="5"/>
+            </StackPanel>
+        </ScrollViewer>
+
+        <!-- Кнопки -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button x:Name="SaveButton" Content="Сохранить" Width="100" Height="35" Margin="5" 
+                    Click="SaveButton_Click" IsDefault="True"/>
+            <Button x:Name="CancelButton" Content="Отмена" Width="100" Height="35" Margin="5" 
+                    Click="CancelButton_Click" IsCancel="True"/>
+        </StackPanel>
+    </Grid>
+</Window>

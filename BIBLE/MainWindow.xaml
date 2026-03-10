@@ -1,0 +1,73 @@
+﻿<Window x:Class="BIBLE.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Библиотека книг" Height="600" Width="900"
+        WindowStartupLocation="CenterScreen">
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Заголовок -->
+        <TextBlock Text="Управление библиотекой" FontSize="24" FontWeight="Bold" Margin="5" Grid.Row="0"/>
+
+        <!-- Панель поиска и фильтрации -->
+        <Border BorderBrush="Gray" BorderThickness="1" Padding="10" Margin="5" Grid.Row="1">
+            <StackPanel>
+                <TextBlock Text="Поиск и фильтрация" FontWeight="Bold" Margin="0,0,0,5"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBox x:Name="SearchTextBox" Grid.Column="0" Margin="5" Padding="5" TextWrapping="Wrap" 
+                             Text="Введите название книги..."/>
+
+                    <ComboBox x:Name="GenreFilterComboBox" Grid.Column="1" Margin="5" Padding="5" 
+                              DisplayMemberPath="Name" SelectedValuePath="Id"/>
+
+                    <ComboBox x:Name="AuthorFilterComboBox" Grid.Column="2" Margin="5" Padding="5" 
+                              DisplayMemberPath="FullName" SelectedValuePath="Id"/>
+
+                    <Button x:Name="SearchButton" Grid.Column="3" Content="Применить фильтр" Margin="5" Padding="10,5" 
+                            Click="SearchButton_Click"/>
+                </Grid>
+            </StackPanel>
+        </Border>
+
+        <!-- DataGrid для книг -->
+        <DataGrid x:Name="BooksDataGrid" Grid.Row="2" Margin="5" AutoGenerateColumns="False" 
+                  IsReadOnly="True" SelectionMode="Single" AlternatingRowBackground="LightGray">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50"/>
+                <DataGridTextColumn Header="Название" Binding="{Binding Title}" Width="200"/>
+                <DataGridTextColumn Header="Авторы" Binding="{Binding BookAuthors.Count}" Width="80"/>
+                <DataGridTextColumn Header="Жанры" Binding="{Binding BookGenres.Count}" Width="80"/>
+                <DataGridTextColumn Header="Год" Binding="{Binding PublishYear}" Width="70"/>
+                <DataGridTextColumn Header="ISBN" Binding="{Binding ISBN}" Width="120"/>
+                <DataGridTextColumn Header="В наличии" Binding="{Binding QuantityInStock}" Width="80"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- Панель кнопок -->
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
+            <Button x:Name="AddBookButton" Content="Добавить книгу" Width="120" Height="35" Margin="5" 
+                    Click="AddBookButton_Click"/>
+            <Button x:Name="EditBookButton" Content="Редактировать" Width="120" Height="35" Margin="5" 
+                    Click="EditBookButton_Click"/>
+            <Button x:Name="DeleteBookButton" Content="Удалить" Width="120" Height="35" Margin="5" 
+                    Click="DeleteBookButton_Click"/>
+            <Button x:Name="ManageAuthorsButton" Content="Авторы" Width="120" Height="35" Margin="5" 
+                    Click="ManageAuthorsButton_Click"/>
+            <Button x:Name="ManageGenresButton" Content="Жанры" Width="120" Height="35" Margin="5" 
+                    Click="ManageGenresButton_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>
